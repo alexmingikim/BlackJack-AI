@@ -8,8 +8,19 @@ import nz.ac.auckland.se281.a3.Player;
  */
 public class Bot extends Player {
 
-	public Bot(String name) {
+	private Strategy strategy;
+
+	public Bot(String name, String strategy) {
 		super(name);
+
+		switch (strategy) {
+		case "R":
+			this.strategy = StrategyFactory.createStrategy("R"); // Create RandomStrategy instance
+		case "LR":
+			this.strategy = StrategyFactory.createStrategy("LR"); // Create LowRiskStrategy instance
+		case "HR":
+			this.strategy = StrategyFactory.createStrategy("HR"); // Create HighRiskStrategy instance
+		}
 	}
 
 	@Override
