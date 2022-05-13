@@ -1,10 +1,17 @@
 package nz.ac.auckland.se281.a3.bot;
 
-public class RandomStrategy {
+import nz.ac.auckland.se281.a3.Participant.Action;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class RandomStrategy implements Strategy {
 
+	@Override
+	public Action play() {
+		return null;
+	}
+
+	@Override
+	public int bet() {
+		return 0;
 	}
 
 }
