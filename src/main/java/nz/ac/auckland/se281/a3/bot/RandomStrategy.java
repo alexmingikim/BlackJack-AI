@@ -2,12 +2,13 @@ package nz.ac.auckland.se281.a3.bot;
 
 import java.util.Random;
 
+import nz.ac.auckland.se281.a3.Hand;
 import nz.ac.auckland.se281.a3.Participant.Action;
 
 public class RandomStrategy implements Strategy {
 
 	@Override
-	public Action play() {
+	public Action play(Hand hand) {
 		// Generate random float between 0.0 and 1.0
 		Random random = new Random();
 		float numberRandom = random.nextFloat();
