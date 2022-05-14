@@ -12,24 +12,20 @@ public class StrategyTargetHighestBidder implements DealerStrategy {
 		this.game = game;
 	}
 
-	@Override
+//	@Override
 	// Target player with highest bet
 	public Player decideTarget() {
 
-		// Human player is the target
-		if (game.getPlayers().get(0).makeABet() == Math.max(game.getPlayers().get(0).makeABet(),
-				Math.max(game.getPlayers().get(1).makeABet(), game.getPlayers().get(2).makeABet()))) {
-			return game.getPlayers().get(0);
+		int bet = 0;
+		Player targetPlayer = null;
+
+		for (Player player : game.getPlayers()) {
+			if (player.getHand().getBet() > bet) {
+				bet = player.getHand().getBet();
+				targetPlayer = player;
+			}
 		}
-		// Bot1 is the target
-		else if (game.getPlayers().get(1).makeABet() == Math.max(game.getPlayers().get(1).makeABet(),
-				game.getPlayers().get(2).makeABet())) {
-			return game.getPlayers().get(1);
-		}
-		// Bot2 is the target
-		else {
-			return game.getPlayers().get(2);
-		}
+		return targetPlayer;
 	}
 
 	@Override
