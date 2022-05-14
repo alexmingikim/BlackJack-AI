@@ -8,14 +8,12 @@ import nz.ac.auckland.se281.a3.dealer.Dealer;
  *
  */
 public abstract class Player extends Participant {
-	protected int bet;
 	private int netWins = 0;
 	private int numRoundsWon = 0;
 	private int numRoundsLost = 0;
 
 	public Player(String name) {
 		super(name);
-		bet = makeABet();
 	}
 
 	// Decide if player won
@@ -40,13 +38,10 @@ public abstract class Player extends Participant {
 		} else {
 			numRoundsLost++;
 		}
-		return netWins = numRoundsWon - numRoundsLost;
+		netWins = numRoundsWon - numRoundsLost;
+		return netWins;
 	}
 
 	public abstract int makeABet();
-
-	public int getBet() {
-		return bet;
-	}
 
 }
