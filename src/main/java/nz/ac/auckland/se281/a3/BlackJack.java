@@ -5,6 +5,9 @@ import java.util.List;
 
 import nz.ac.auckland.se281.a3.bot.Bot;
 import nz.ac.auckland.se281.a3.dealer.Dealer;
+import nz.ac.auckland.se281.a3.dealer.DealerStrategy;
+import nz.ac.auckland.se281.a3.dealer.StrategyTargetHighestBidder;
+import nz.ac.auckland.se281.a3.dealer.StrategyTargetTopWinner;
 
 /**
  * Unless it is specified in the JavaDoc, you cannot change any methods.
@@ -16,11 +19,15 @@ public class BlackJack {
 	private List<Player> players;
 	private Dealer dealer;
 	private Deck deck;
+	private DealerStrategy[] strategies;
+	private int currentStrategy;
 
 	public BlackJack(Deck deck) {
 		this.deck = deck;
 		players = new ArrayList<>();
 		players.add(new Human("Player1")); // add the Human player first.
+		strategies = new DealerStrategy[2];
+		currentStrategy = 0;
 	}
 
 	/**
@@ -79,10 +86,9 @@ public class BlackJack {
 	 * Task1
 	 */
 	protected void initBots() {
-		String botStrategyString = getBotStrategy(); // Obtain strategy for bots to take
-		Bot bot1 = new Bot("Bot1", botStrategyString);
+		String botStrategyString = getBotStrategy(); // Obtain strategy for bots to take from user
+		Bot bot1 = new Bot("Bot1", botStrategyString); // Create bots with desired strategy
 		Bot bot2 = new Bot("Bot2", botStrategyString);
-		// create and set Bots strategy here
 		players.add(bot1);
 		players.add(bot2);
 	}
@@ -93,7 +99,26 @@ public class BlackJack {
 	 */
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
-		dealer = new Dealer("Dealer", this);
+		strategies[0] = new StrategyTargetHighestBidder(this);
+		strategies[1] = new StrategyTargetTopWinner(this);
+		dealer = new Dealer("Dealer", strategies[currentStrategy]);
+	}
+
+	private void decideIfChangeStrategy(Dealer dealer) {
+		if (currentStrategy == 0) {
+			for (int i = 0; i < 3; i++) {
+				if (this.getPlayers().get(i).getNetWins() >= 2) {
+					currentStrategy++;
+					dealer.setDealerStrategy(strategies[currentStrategy]);
+					return;
+				}
+			}
+		}
+
+		if ((currentStrategy == 1) && (this.getPlayers().get(0).getNetWins() < 2)
+				&& (this.getPlayers().get(1).getNetWins() < 2) && (this.getPlayers().get(2).getNetWins() < 2)) {
+			currentStrategy--;
+		}
 	}
 
 	/**
@@ -101,7 +126,7 @@ public class BlackJack {
 	 * change this method for Task 2 and Task 3
 	 */
 	protected void printAndUpdateResults(int round) {
-
+		decideIfChangeStrategy(dealer);
 	}
 
 	/**
