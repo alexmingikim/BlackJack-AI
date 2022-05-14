@@ -8,12 +8,13 @@ public class StrategyFactory {
 		switch (typeOfStrategy) {
 		case "R":
 			strategy = new RandomStrategy();
-
+			break;
 		case "LR":
 			strategy = new LowRiskStrategy();
-
+			break;
 		case "HR":
 			strategy = new HighRiskStrategy();
+			break;
 		}
 		return strategy;
 	}

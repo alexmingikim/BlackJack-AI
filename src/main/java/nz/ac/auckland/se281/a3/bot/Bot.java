@@ -16,10 +16,13 @@ public class Bot extends Player {
 		switch (strategy) {
 		case "R":
 			this.strategy = StrategyFactory.createStrategy("R"); // Create RandomStrategy instance
+			break;
 		case "LR":
 			this.strategy = StrategyFactory.createStrategy("LR"); // Create LowRiskStrategy instance
+			break;
 		case "HR":
 			this.strategy = StrategyFactory.createStrategy("HR"); // Create HighRiskStrategy instance
+			break;
 		}
 	}
 
