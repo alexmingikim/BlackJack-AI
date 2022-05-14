@@ -104,10 +104,18 @@ public class BlackJack {
 		dealer = new Dealer("Dealer", strategies[currentStrategy]);
 	}
 
+	private void updateResults(Dealer dealer) {
+		// Update results
+		for (Player player : players) {
+			player.computeNetWins(dealer);
+		}
+	}
+
 	private void decideIfChangeStrategy(Dealer dealer) {
+		// Decide whether to change to target top winner strategy
 		if (currentStrategy == 0) {
-			for (int i = 0; i < 3; i++) {
-				if (this.getPlayers().get(i).getNetWins() >= 2) {
+			for (Player player : players) {
+				if (player.getNetWins() >= 2) {
 					currentStrategy++;
 					dealer.setDealerStrategy(strategies[currentStrategy]);
 					return;
@@ -115,9 +123,19 @@ public class BlackJack {
 			}
 		}
 
-		if ((currentStrategy == 1) && (this.getPlayers().get(0).getNetWins() < 2)
-				&& (this.getPlayers().get(1).getNetWins() < 2) && (this.getPlayers().get(2).getNetWins() < 2)) {
-			currentStrategy--;
+		// Decide whether to change to target highest bidder strategy
+		if (currentStrategy == 1) {
+			int countOfPlayersNetWinsLessThanTwo = 0;
+			for (Player player : players) {
+				if (player.getNetWins() < 2) {
+					countOfPlayersNetWinsLessThanTwo++;
+				}
+			}
+			if (countOfPlayersNetWinsLessThanTwo == players.size()) {
+				currentStrategy--;
+				dealer.setDealerStrategy(strategies[currentStrategy]);
+				return;
+			}
 		}
 	}
 
@@ -126,6 +144,7 @@ public class BlackJack {
 	 * change this method for Task 2 and Task 3
 	 */
 	protected void printAndUpdateResults(int round) {
+		updateResults(dealer);
 		decideIfChangeStrategy(dealer);
 	}
 

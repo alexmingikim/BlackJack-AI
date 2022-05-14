@@ -27,7 +27,7 @@ public class RandomStrategy implements Strategy {
 
 	@Override
 	public int bet() {
-		// Create a random between 1 and 100 (inclusive)
+		// Create a random bet between 1 and 100 (inclusive)
 		Random random = new Random();
 		int numberRandom = random.nextInt(1, 101);
 		return numberRandom;

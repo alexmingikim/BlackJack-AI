@@ -17,20 +17,16 @@ public class StrategyTargetTopWinner implements DealerStrategy {
 	// Target player with the highest new wins
 	public Player decideTarget() {
 
-		// Human player is the target
-		if (game.getPlayers().get(0).getNetWins() == Math.max(game.getPlayers().get(0).getNetWins(),
-				Math.max(game.getPlayers().get(1).getNetWins(), game.getPlayers().get(2).getNetWins()))) {
-			return game.getPlayers().get(0);
+		int highestNetWins = 0; // Initialise
+		Player targetPlayer = null;
+
+		for (Player player : game.getPlayers()) {
+			if (player.getNetWins() > highestNetWins) {
+				highestNetWins = player.getNetWins();
+				targetPlayer = player;
+			}
 		}
-		// Bot1 is the target
-		else if (game.getPlayers().get(1).getNetWins() == Math.max(game.getPlayers().get(1).getNetWins(),
-				game.getPlayers().get(2).getNetWins())) {
-			return game.getPlayers().get(1);
-		}
-		// Bot2 is the target
-		else {
-			return game.getPlayers().get(2);
-		}
+		return targetPlayer;
 	}
 
 	@Override
