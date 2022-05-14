@@ -1,13 +1,13 @@
 package nz.ac.auckland.se281.a3.dealer;
 
-import nz.ac.auckland.se281.a3.BlackJack;
+import nz.ac.auckland.se281.a3.Hand;
 import nz.ac.auckland.se281.a3.Participant.Action;
 import nz.ac.auckland.se281.a3.Player;
 
 public interface DealerStrategy {
 
-	Player decideTarget(BlackJack game);
+	Player decideTarget();
 
-	Action play();
+	Action play(Hand hand);
 
 }
