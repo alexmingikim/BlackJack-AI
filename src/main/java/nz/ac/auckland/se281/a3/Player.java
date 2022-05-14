@@ -44,4 +44,8 @@ public abstract class Player extends Participant {
 
 	public abstract int makeABet();
 
+	public int getNetWins() {
+		return netWins;
+	}
+
 }
