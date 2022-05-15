@@ -2,11 +2,6 @@ package nz.ac.auckland.se281.a3;
 
 import nz.ac.auckland.se281.a3.dealer.Dealer;
 
-/**
- * 
- * You can (and should) add new fields and/or methods
- *
- */
 public abstract class Player extends Participant {
 	private int netWins = 0;
 	private int numRoundsWon = 0;
@@ -16,7 +11,12 @@ public abstract class Player extends Participant {
 		super(name);
 	}
 
-	// Decide if player won
+	/**
+	 * Decides if a player won or lost against the dealer for a given round.
+	 * 
+	 * @param dealer dealer which a player is playing against
+	 * @return true if player won or false if player lost
+	 */
 	public boolean isPlayerWon(Dealer dealer) {
 		// Conditions for a player to win:
 		// Player must not be busted
@@ -34,6 +34,11 @@ public abstract class Player extends Participant {
 		}
 	}
 
+	/**
+	 * Computes the number of net wins for a given player.
+	 * 
+	 * @param dealer dealer which a player is playing against
+	 */
 	public void computeNetWins(Dealer dealer) {
 		if (isPlayerWon(dealer) == true) {
 			numRoundsWon++;

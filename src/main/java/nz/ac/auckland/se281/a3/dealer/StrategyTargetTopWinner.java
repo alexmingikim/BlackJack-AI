@@ -7,21 +7,27 @@ import nz.ac.auckland.se281.a3.Player;
 
 public class StrategyTargetTopWinner extends DealerStrategy {
 
+	/**
+	 * Instantiates a dealer strategy that targets the player with the highest net
+	 * wins
+	 * 
+	 * @param game instance of BlackJack game
+	 */
 	public StrategyTargetTopWinner(BlackJack game) {
 		this.game = game;
 	}
 
 	@Override
-	// Target player with the highest new wins
+	// Target player with the highest net wins
 	public Player decideTarget() {
 
 		int highestNetWins = 0; // Initialise
-		Player targetPlayer = null;
+		Player targetPlayer = null; // Initialise
 
 		for (Player player : game.getPlayers()) {
 			if (player.getNetWins() > highestNetWins) {
 				highestNetWins = player.getNetWins();
-				targetPlayer = player;
+				targetPlayer = player; // Target player has highest net wins
 			}
 		}
 		return targetPlayer;

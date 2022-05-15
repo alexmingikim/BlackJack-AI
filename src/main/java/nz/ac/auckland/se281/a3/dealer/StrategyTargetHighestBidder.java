@@ -7,21 +7,27 @@ import nz.ac.auckland.se281.a3.Player;
 
 public class StrategyTargetHighestBidder extends DealerStrategy {
 
+	/**
+	 * Instantiates a dealer strategy that targets the highest bidder for a given
+	 * round.
+	 * 
+	 * @param game instance of BlackJack game
+	 */
 	public StrategyTargetHighestBidder(BlackJack game) {
 		this.game = game;
 	}
 
-//	@Override
+	@Override
 	// Target player with highest bet
 	public Player decideTarget() {
 
-		int bet = 0;
-		Player targetPlayer = null;
+		int bet = 0; // Initialise
+		Player targetPlayer = null; // Initialise
 
 		for (Player player : game.getPlayers()) {
 			if (player.getHand().getBet() > bet) {
 				bet = player.getHand().getBet();
-				targetPlayer = player;
+				targetPlayer = player; // Target player has highest bet
 			}
 		}
 		return targetPlayer;

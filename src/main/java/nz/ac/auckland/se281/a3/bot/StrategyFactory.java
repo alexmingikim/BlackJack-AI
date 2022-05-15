@@ -2,8 +2,14 @@ package nz.ac.auckland.se281.a3.bot;
 
 public class StrategyFactory {
 
-	public static Strategy createStrategy(String typeOfStrategy) {
-		Strategy strategy = null;
+	/**
+	 * Instantiates a certain strategy of a bot (using the factory design pattern).
+	 * 
+	 * @param typeOfStrategy strategy to be taken by a bot
+	 * @return instance of a bot strategy
+	 */
+	public static BotStrategy createStrategy(String typeOfStrategy) {
+		BotStrategy strategy = null;
 
 		switch (typeOfStrategy) {
 		case "R":

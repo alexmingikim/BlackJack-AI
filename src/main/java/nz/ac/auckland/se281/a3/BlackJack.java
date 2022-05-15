@@ -9,11 +9,6 @@ import nz.ac.auckland.se281.a3.dealer.DealerStrategy;
 import nz.ac.auckland.se281.a3.dealer.StrategyTargetHighestBidder;
 import nz.ac.auckland.se281.a3.dealer.StrategyTargetTopWinner;
 
-/**
- * Unless it is specified in the JavaDoc, you cannot change any methods.
- * 
- * You can add new methods and/or new instance fields
- */
 public class BlackJack {
 
 	private List<Player> players;
@@ -22,6 +17,13 @@ public class BlackJack {
 	private DealerStrategy[] strategies;
 	private int currentStrategy;
 
+	/**
+	 * Instantiates a game of BlackJack. Creates a list of players and adds human
+	 * player as the first player of the game. Creates an array of strategies for
+	 * the dealer.
+	 * 
+	 * @param deck deck of cards to be used in the BlackJack game
+	 */
 	public BlackJack(Deck deck) {
 		this.deck = deck;
 		players = new ArrayList<>();
@@ -82,8 +84,8 @@ public class BlackJack {
 	}
 
 	/**
-	 * TODO This method initializes the Bots, you should change this method for
-	 * Task1
+	 * Instantiates Bot players that take a common strategy (strategy the bots take
+	 * is defined by the user). Adds the Bot players to the array list "players".
 	 */
 	protected void initBots() {
 		String botStrategyString = getBotStrategy(); // Obtain strategy for bots to take from user
@@ -94,8 +96,8 @@ public class BlackJack {
 	}
 
 	/**
-	 * TODO This method initializes the Dealer, you should change this method for
-	 * Task2
+	 * Instantiates a dealer which can take one of two strategies. Initially the
+	 * dealer takes the StrategyTargetHighestBidder.
 	 */
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
@@ -104,13 +106,23 @@ public class BlackJack {
 		dealer = new Dealer("Dealer", strategies[currentStrategy]);
 	}
 
+	/**
+	 * Updates the #Wins, #Losses and #NetWins for each player after a round
+	 * finishes.
+	 * 
+	 * @param dealer dealer which the players are playing against
+	 */
 	private void updateResults(Dealer dealer) {
-		// Update results
 		for (Player player : players) {
 			player.computeNetWins(dealer);
 		}
 	}
 
+	/**
+	 * Decides whether the dealer should change its strategy upon finishing a round.
+	 * 
+	 * @param dealer dealer whose strategy should be changed (if need)
+	 */
 	private void decideIfChangeStrategy(Dealer dealer) {
 		// Decide whether to change to target top winner strategy
 		if (currentStrategy == 0) {
@@ -140,14 +152,17 @@ public class BlackJack {
 	}
 
 	/**
-	 * TODO This method prints and updates the results (wins and losses) you should
-	 * change this method for Task 2 and Task 3
+	 * Updates the results (wins and losses) of every player upon finishing a round.
+	 * Decides if dealer should change its strategy. Prints how many chips a player
+	 * won or lost in the round.
+	 * 
+	 * @Param round the current round as an int
 	 */
 	protected void printAndUpdateResults(int round) {
 		updateResults(dealer);
 		decideIfChangeStrategy(dealer);
 
-		// Print for each player the amount of chip win or lost
+		// Print for each player the amount of chip won or lost
 		for (Player player : players) {
 			if (player.isPlayerWon(dealer) == true) {
 				System.out.println(
@@ -160,7 +175,8 @@ public class BlackJack {
 	}
 
 	/**
-	 * TODO This method should print the statistic of the game when it ends
+	 * Prints the statistic of the game (i.e. how many times each player won and
+	 * lost) when it ends.
 	 */
 	protected void printGameStatistics() {
 		for (Player player : players) {
