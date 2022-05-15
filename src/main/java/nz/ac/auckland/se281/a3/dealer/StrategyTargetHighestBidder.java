@@ -5,8 +5,7 @@ import nz.ac.auckland.se281.a3.Hand;
 import nz.ac.auckland.se281.a3.Participant.Action;
 import nz.ac.auckland.se281.a3.Player;
 
-public class StrategyTargetHighestBidder implements DealerStrategy {
-	private BlackJack game;
+public class StrategyTargetHighestBidder extends DealerStrategy {
 
 	public StrategyTargetHighestBidder(BlackJack game) {
 		this.game = game;
