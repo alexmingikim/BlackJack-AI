@@ -146,12 +146,27 @@ public class BlackJack {
 	protected void printAndUpdateResults(int round) {
 		updateResults(dealer);
 		decideIfChangeStrategy(dealer);
+
+		// Print for each player the amount of chip win or lost
+		for (Player player : players) {
+			if (player.isPlayerWon(dealer) == true) {
+				System.out.println(
+						"Round " + round + ": " + player.getName() + " won " + player.getHand().getBet() + " chips");
+			} else {
+				System.out.println(
+						"Round " + round + ": " + player.getName() + " lost " + player.getHand().getBet() + " chips");
+			}
+		}
 	}
 
 	/**
 	 * TODO This method should print the statistic of the game when it ends
 	 */
 	protected void printGameStatistics() {
+		for (Player player : players) {
+			System.out.println(player.getName() + " won " + player.getNumRoundsWon() + " times and lost "
+					+ player.getNumRoundsLost() + " times");
+		}
 
 	}
 

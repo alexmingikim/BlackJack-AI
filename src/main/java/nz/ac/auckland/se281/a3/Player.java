@@ -49,4 +49,12 @@ public abstract class Player extends Participant {
 		return netWins;
 	}
 
+	public int getNumRoundsWon() {
+		return numRoundsWon;
+	}
+
+	public int getNumRoundsLost() {
+		return numRoundsLost;
+	}
+
 }
