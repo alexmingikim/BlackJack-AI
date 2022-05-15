@@ -9,16 +9,16 @@ public class StrategyFactory {
 	 * @return instance of a bot strategy
 	 */
 	public static BotStrategy createStrategy(String typeOfStrategy) {
-		BotStrategy strategy = null;
+		BotStrategy strategy = null; // Initialise
 
 		switch (typeOfStrategy) {
-		case "R":
+		case "R": // Random
 			strategy = new RandomStrategy();
 			break;
-		case "LR":
+		case "LR": // Low risk
 			strategy = new LowRiskStrategy();
 			break;
-		case "HR":
+		case "HR": // High risk
 			strategy = new HighRiskStrategy();
 			break;
 		}
