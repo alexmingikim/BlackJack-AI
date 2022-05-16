@@ -19,15 +19,14 @@ public abstract class Player extends Participant {
 	 */
 	public boolean isPlayerWon(Dealer dealer) {
 		// Conditions for a player to win:
-		// Player must not be busted
+		// Player must not be busted AND
 		// (1) Player has blackjack but dealer does not
-		// (2) Player and dealer both do not have blackjack but player has higher score
+		// (2) Player has higher score than dealer
 		// (3) Player is not busted but dealer is busted
-		if ((this.getHand().getScore() <= 21)
-				&& (((this.getHand().getScore() == 21) && (dealer.getHand().getScore() != 21))
-						|| ((this.getHand().getScore() != 21) && (dealer.getHand().getScore() != 21))
-								&& ((this.getHand().getScore() > dealer.getHand().getScore()))
-						|| (dealer.getHand().getScore() > 21))) {
+		if ((this.getHand().isBust() == false)
+				&& (((this.getHand().isBlackJack() == true) && (dealer.getHand().isBlackJack() == false))
+						|| ((this.getHand().getScore() > dealer.getHand().getScore()))
+						|| (dealer.getHand().isBust() == true))) {
 			return true;
 		} else {
 			return false;
