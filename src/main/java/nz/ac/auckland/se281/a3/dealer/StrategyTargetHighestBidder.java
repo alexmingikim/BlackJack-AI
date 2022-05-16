@@ -42,8 +42,8 @@ public class StrategyTargetHighestBidder extends DealerStrategy {
 		// (3) Target player did BlackJack and score of dealer is at least 17
 		Player targetPlayer = decideTarget();
 
-		if ((hand.getScore() >= targetPlayer.getHand().getScore()) || (targetPlayer.getHand().getScore() > 21)
-				|| (targetPlayer.getHand().getScore() == 21 && hand.getScore() >= 17)) {
+		if ((hand.getScore() >= targetPlayer.getHand().getScore()) || (targetPlayer.getHand().isBust() == true)
+				|| ((targetPlayer.getHand().isBlackJack() == true) && (hand.getScore() >= 17))) {
 			return Action.HOLD;
 		}
 		// Otherwise HIT

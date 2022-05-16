@@ -37,13 +37,13 @@ public class StrategyTargetTopWinner extends DealerStrategy {
 	public Action play(Hand hand) {
 		// Conditions under which dealer will HOLD
 		// (1) Dealer's score is equal or higher than score of target player (i.e.
-		// highest bidder)
+		// player with highest net wins)
 		// (2) Target player is busted
 		// (3) Target player did BlackJack and score of dealer is at least 17
 		Player targetPlayer = decideTarget();
 
-		if ((hand.getScore() >= targetPlayer.getHand().getScore()) || (targetPlayer.getHand().getScore() > 21)
-				|| (targetPlayer.getHand().getScore() == 21 && hand.getScore() >= 17)) {
+		if ((hand.getScore() >= targetPlayer.getHand().getScore()) || (targetPlayer.getHand().isBust() == true)
+				|| ((targetPlayer.getHand().isBlackJack() == true) && (hand.getScore() >= 17))) {
 			return Action.HOLD;
 		}
 		// Otherwise HIT
